@@ -1,0 +1,2 @@
+# ChoreHub
+Chore Management System

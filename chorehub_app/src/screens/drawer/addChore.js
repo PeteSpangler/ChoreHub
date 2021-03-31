@@ -13,7 +13,7 @@ import client from "../../api/client";
 import styles from "./addChore_styles";
 import validationSchema from "./addChore_valid";
 import PhotoPicker from "../components/shared/photo.js";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const AddChore = () => {
   const [photo, setPhoto] = useState("");
@@ -25,6 +25,10 @@ const AddChore = () => {
       },
     ]);
   };
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
   const handleSubmit = async (values) => {
     const data = new FormData();
     data.append("owner", values.owner);
@@ -36,7 +40,6 @@ const AddChore = () => {
       name: "filename.jpg",
       type: "image/jpg",
     });
-    data.append("dateCompleted", values.dateCompleted);
 
     try {
       const response = await client.post("api/create/", data);
@@ -53,7 +56,6 @@ const AddChore = () => {
         task: "",
         dueDate: "",
         seller: "",
-        dateCompleted: "",
       }}
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
@@ -76,11 +78,11 @@ const AddChore = () => {
               onChangeText={handleChange("task")}
             />
             <Text style={styles.error}>{errors.task}</Text>
-            <DateTimePicker
-              value={values.dueDate}
-              mode={mode}
+            <DateTimePickerModal
+              mode="dueDate"
               display="Chore Deadline?"
-              onChangeText={handleChange("dueDate")}
+              onConfirm={handleChange("dueDate")}
+              onCancel={hideDatePicker}
             />
             <Text style={styles.error}>{errors.dueDate}</Text>
             <TextInput
@@ -90,13 +92,6 @@ const AddChore = () => {
               onChangeText={handleChange("seller")}
             />
             <Text style={styles.error}>{errors.seller}</Text>
-            <DateTimePicker
-              value={values.dateCompleted}
-              mode={"mode"}
-              display="Day it was done?"
-              onChangeText={handleChange("dateCompleted")}
-            />
-            <Text style={styles.error}>{errors.dateCompleted}</Text>
             <Button
               style={styles.addButton}
               onPress={handleSubmit}

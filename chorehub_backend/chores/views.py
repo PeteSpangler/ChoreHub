@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 from django.contrib.auth import get_user_model
-from .serializers import ChoreListSerializer, ChoreDetailSerializer, UserSerializer
-from .models import Chore
+from .serializers import ChoreListSerializer, HouseDetailSerializer, ChoreDetailSerializer, UserSerializer
+from .models import Chore, House, Image
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
@@ -36,3 +36,26 @@ class ChoreRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
 class ChoreDestroyAPIView(generics.DestroyAPIView):
     lookup_field = "id"
     queryset = Chore.objects.all()
+
+class HouseListAPIView(generics.ListAPIView):
+    queryset = House.objects.all()
+    serializer_class = HouseDetailSerializer
+
+class HouseRetrieveAPIView(generics.RetrieveAPIView):
+    lookup_field = "id"
+    queryset = Chore.objects.all()
+    serializer_class = HouseDetailSerializer
+
+class HouseCreateAPIView(generics.CreateAPIView):
+    parser_classes = [MultiPartParser]
+    queryset = House.objects.all()
+    serializer_class = HouseDetailSerializer
+
+class HouseRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    lookup_field = "id"
+    queryset = House.objects.all()
+    serializer_class = HouseDetailSerializer
+
+class HouseDestroyAPIView(generics.DestroyAPIView):
+    lookup_field = "id"
+    queryset = House.objects.all()

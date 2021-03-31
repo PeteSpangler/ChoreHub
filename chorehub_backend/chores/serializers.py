@@ -1,10 +1,27 @@
 from rest_framework import serializers
-from .models import Image, Chore
+from .models import Image, Chore, House
 from rest_framework.reverse import reverse
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 
 UserModel = get_user_model()
+
+class HouseDetailSerializer(serializers.ModelSerializer):
+    absolute_url = serializers.SerializerMethodField()
+    update = serializers.SerializerMethodField()
+    delete = serializers.SerializerMethodField()
+    class Meta:
+        model = House
+        fields = ['id', 'home', 'choresCompleted', 'update', 'delete',]
+
+    def get_absolute_url(self, obj):
+        return reverse('house_detail', args=(obj.pk,))
+
+    def get_update(self, obj):
+        return reverse('house_update', args=(obj.pk,))
+
+    def get_delete(self, obj):
+        return reverse('house_delete', args=(obj.pk,))
 
 class ChoreListSerializer(serializers.ModelSerializer):
     absolute_url = serializers.SerializerMethodField()
@@ -13,12 +30,11 @@ class ChoreListSerializer(serializers.ModelSerializer):
         model = Chore
         fields = [
             'id',
-            'owner',
             'task',
+            'owner',
             'dueDate',
-            'seller',
-            'image',
-            'dateCompleted',
+            'home',
+            'is_complete',
             'absolute_url',
         ]
 
@@ -28,7 +44,7 @@ class ChoreListSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
-        fields = ['id', 'proof', 'uploaded_at']
+        fields = ['id', 'chore', 'proof', 'uploaded_at']
         model = Image
 
 class ChoreDetailSerializer(serializers.ModelSerializer):
@@ -40,12 +56,11 @@ class ChoreDetailSerializer(serializers.ModelSerializer):
         model = Chore
         fields = [
             'id',
-            'owner',
             'task',
+            'owner',
             'dueDate',
-            'seller',
-            'image',
-            'dateCompleted',
+            'home',
+            'is_complete',
             'chore_images',
             'update',
             'delete',

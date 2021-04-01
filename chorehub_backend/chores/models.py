@@ -10,7 +10,6 @@ class Chore(models.Model):
     task = models.CharField(max_length=200, blank=False)
     owner = models.CharField(max_length=100, blank=False)
     dueDate = models.DateField(blank=True)
-    home = models.ForeignKey(House, on_delete=models.CASCADE, default="Home", blank=True)
     is_complete = models.BooleanField(default=False)
 
     def __str__(self):

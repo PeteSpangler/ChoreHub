@@ -8,7 +8,7 @@ const DetailView = ({ route }) => {
 
   const getDetail = async (url) => {
     try {
-      const response = await client.get(url);
+      const response = await client.get(url + "/chores");
       if (!response.ok) {
         setDetail(response.data);
       }

@@ -42,7 +42,7 @@ const AddChore = () => {
     });
 
     try {
-      const response = await client.post("api/create/", data);
+      const response = await client.post("api/create/chores", data);
       postedAlert(response);
     } catch (error) {
       console.log(error);

@@ -15,7 +15,7 @@ const ListView = ({ navigation }) => {
 
   const getList = async () => {
     console.log(client);
-    const response = await client.get("/api");
+    const response = await client.get("chores");
     setData(response.data);
   };
 

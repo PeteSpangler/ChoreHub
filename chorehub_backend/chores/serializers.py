@@ -12,7 +12,7 @@ class HouseDetailSerializer(serializers.ModelSerializer):
     delete = serializers.SerializerMethodField()
     class Meta:
         model = House
-        fields = ['id', 'home', 'choresCompleted', 'update', 'delete',]
+        fields = ['id', 'home', 'choresCompleted', 'update', 'delete', 'absolute_url',]
 
     def get_absolute_url(self, obj):
         return reverse('house_detail', args=(obj.pk,))
@@ -33,7 +33,6 @@ class ChoreListSerializer(serializers.ModelSerializer):
             'task',
             'owner',
             'dueDate',
-            'home',
             'is_complete',
             'absolute_url',
         ]

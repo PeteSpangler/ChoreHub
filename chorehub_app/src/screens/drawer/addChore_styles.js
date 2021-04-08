@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   container: {
+    paddingTop: 200,
     justifyContent: "center",
     backgroundColor: "#ffffff",
     width: "100%",
@@ -36,6 +37,12 @@ const styles = StyleSheet.create({
   datePickerStyle: {
     width: 200,
     marginTop: 20,
+  },
+  content: {
+    padding: 20,
+    backgroundColor: "#ffffff",
+    width: "100%",
+    height: "100%",
   },
 });
 export default styles;

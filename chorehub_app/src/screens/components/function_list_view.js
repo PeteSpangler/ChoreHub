@@ -9,13 +9,14 @@ import {
 } from "react-native";
 import client from "./../../api/client";
 import Card from "./shared/card";
+import axios from "axios";
 
 const ListView = ({ navigation }) => {
   const [data, setData] = useState([]);
 
   const getList = async () => {
-    console.log(client);
-    const response = await client.get("chores");
+    console.log("http://127.0.0.1:8000/");
+    const response = await axios.get("http://127.0.0.1:8000/api/chores/");
     setData(response.data);
   };
 
@@ -44,7 +45,7 @@ const ListView = ({ navigation }) => {
               }}
             >
               <Card
-                image={item.image}
+                owner={item.owner}
                 task={item.task}
                 dateDue={item.dueDate}
               />

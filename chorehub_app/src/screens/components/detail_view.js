@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Image, FlatList, StyleSheet } from "react-native";
 import client from "./../../api/client";
+import axios from "axios";
 
 const DetailView = ({ route }) => {
   const [detail, setDetail] = useState("");
@@ -8,7 +9,7 @@ const DetailView = ({ route }) => {
 
   const getDetail = async (url) => {
     try {
-      const response = await client.get(url + "/chores");
+      const response = await axios.get("http://127.0.0.1:8000/api/chores");
       if (!response.ok) {
         setDetail(response.data);
       }
@@ -22,25 +23,18 @@ const DetailView = ({ route }) => {
   return (
     <View style={styles.center}>
       <FlatList
-        horizontal={true}
-        data={detail.choreImage}
+        data={data}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => {
           return (
-            <Image
-              style={styles.Image}
-              source={{
-                uri: item.image,
-              }}
-            />
+            <View style={styles.title}>
+              <Text style={styles.title}>Owner: {detail.owner}</Text>
+              <Text style={styles.details}>Task: {detail.task}</Text>
+              <Text style={styles.details}>Due By: {detail.dueDate}</Text>
+            </View>
           );
         }}
       />
-      <Text style={styles.title}>Owner: {detail.owner}</Text>
-      <Text style={styles.details}>Task: {detail.task}</Text>
-      <Text style={styles.details}>Due By: {detail.dueDate}</Text>
-      <Text style={styles.details}>Chore Seller: {detail.seller}</Text>
-      <Text style={styles.details}>Date Completed: {detail.dateCompleted}</Text>
     </View>
   );
 };

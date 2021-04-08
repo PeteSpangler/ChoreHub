@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
-const Card = ({ image, task, dateDue }) => {
+const Card = ({ owner, task, dateDue }) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: image }} />
       <View style={styles.inner}>
+        <Text style={styles.title}>{owner}</Text>
         <Text style={styles.title}>{task}</Text>
         <Text style={styles.details}>{dateDue}</Text>
       </View>

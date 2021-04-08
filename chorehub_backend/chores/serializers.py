@@ -58,7 +58,6 @@ class ChoreDetailSerializer(serializers.ModelSerializer):
             'task',
             'owner',
             'dueDate',
-            'home',
             'is_complete',
             'chore_images',
             'update',

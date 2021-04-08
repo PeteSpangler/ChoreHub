@@ -34,21 +34,17 @@ renderScreenComponents = () => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#92A8D1",
     alignItems: "center",
     justifyContent: "center",
   },
   baseText: {
-    color: "navy",
+    color: "#0f1e90",
     fontSize: 30,
-    fontStyle: "italic",
+    fontStyle: "normal",
   },
   newText: {
     color: "red",
-  },
-  pizzaImage: {
-    width: 200,
-    height: 200,
   },
 });
 

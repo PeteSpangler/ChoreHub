@@ -3,17 +3,17 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#577399",
     alignItems: "center",
     justifyContent: "center",
   },
   instructions: {
-    color: "#888",
+    color: "#20232a",
     fontSize: 22,
+    textAlign: "center",
+    fontWeight: "bold",
   },
   logo: {
-    width: 305,
-    height: 159,
     resizeMode: "contain",
   },
   addButton: {

@@ -18,19 +18,29 @@ import RegForm from "./components/regForm";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+LoginOrRegister = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Login" component={LoginForm} />
+    <Stack.Screen name="Register" component={RegForm} />
+  </Stack.Navigator>
+);
+
+ThemChores = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="AddChore" component={AddChore} />
+    <Stack.Screen name="UpdateChore" component={UpdateChore} />
+    <Stack.Screen name="DeleteChore" component={DeleteChore} />
+  </Stack.Navigator>
+);
+
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Login" component={LoginForm} />
         <Drawer.Screen name="Register" component={RegForm} />
       </Drawer.Navigator>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Login" component={LoginForm} />
-        <Stack.Screen name="Register" component={RegForm} />
-      </Stack.Navigator>
     </NavigationContainer>
   );
 }

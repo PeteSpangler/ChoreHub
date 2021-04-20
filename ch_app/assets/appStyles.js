@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
     height: 159,
     resizeMode: "contain",
   },
+  addButton: {
+    borderWidth: 1,
+    borderColor: "#007BFF",
+    backgroundColor: "#007BFF",
+    padding: 15,
+  },
   button1: {
     color: "#841584",
     paddingTop: 5,

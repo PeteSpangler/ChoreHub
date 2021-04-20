@@ -25,7 +25,7 @@ function HomeScreen({ navigation }) {
       />
       <Button
         color="#f194ff"
-        title="Or perhaps you should register first?"
+        title="Register an account!"
         onPress={() => navigation.navigate("Register")}
       />
     </View>

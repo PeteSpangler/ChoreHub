@@ -1,8 +1,10 @@
 import React from "react";
-import { TextInput, Button, Text, View, SafeAreaView } from "react-native";
+import { Text, View, SafeAreaView } from "react-native";
 import client from "./client";
 import styles from "../assets/appStyles";
 import { Formik } from "formik";
+import { Button, TextInput } from "react-native-paper";
+import AppHeader_LoginReg from "./appHeader_LoginReg";
 
 const LoginForm = () => {
   const handleSubmit = async (values) => {
@@ -20,6 +22,7 @@ const LoginForm = () => {
 
   return (
     <View>
+      <AppHeader_LoginReg />
       <Formik
         initialValues={{
           username: "",
@@ -48,9 +51,13 @@ const LoginForm = () => {
               <Text style={styles.error}>{errors.password}</Text>
               <Button
                 style={styles.addButton}
+                mode="contained"
+                color="#1bb9ee"
                 onPress={handleSubmit}
                 title="Submit"
-              />
+              >
+                Login and Get it Done!
+              </Button>
             </View>
           </SafeAreaView>
         )}

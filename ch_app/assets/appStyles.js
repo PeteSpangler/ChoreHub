@@ -4,8 +4,13 @@ import * as Paper from "react-native-paper";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#5D3593",
+    backgroundColor: "#532f84",
     textAlign: "center",
+  },
+  updateChorepage: {
+    flex: 1,
+    backgroundColor: "#532f84",
+    paddingTop: 25,
   },
   Button: {
     borderWidth: 20,
@@ -21,8 +26,8 @@ const styles = StyleSheet.create({
   },
   addButton: {
     borderWidth: 1,
-    borderColor: "#007BFF",
-    backgroundColor: "#007BFF",
+    borderColor: "#1bb9ee",
+    backgroundColor: "#1bb9ee",
     padding: 15,
   },
   thumbnail: {
@@ -47,15 +52,17 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   content: {
-    padding: 20,
-    backgroundColor: "#ffffff",
+    padding: 0,
+    backgroundColor: "#532f84",
     width: "100%",
     height: "100%",
   },
   title: {
     fontSize: 30,
-    color: "black",
+    color: "#1bb9ee",
+    fontWeight: "bold",
     textAlign: "center",
+    paddingTop: 30,
     paddingBottom: 50,
   },
 });

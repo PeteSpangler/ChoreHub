@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import { Button } from "react-native-paper";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Formik } from "formik";
 import styles from "../assets/appStyles";
 import client from "../components/client";
@@ -40,15 +41,23 @@ const UpdateChore = () => {
     <View>
       <Formik
         initialValues={{
-          isComplete: "",
+          isComplete: false,
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <SafeAreaView style={styles.content}>
-            <View style={styles.container}>
-              {/* add checkbox thing */}
+            <View style={[styles.updateChorepage, { flexDirection: "column" }]}>
+              <BouncyCheckbox
+                size={25}
+                fillColor="#1bb9ee"
+                unfillColor="#007BFF"
+                text="Was this chore completed?"
+                onPress={() => {
+                  values.isComplete;
+                }}
+              />
               <Button
                 style={styles.Button}
                 mode="contained"

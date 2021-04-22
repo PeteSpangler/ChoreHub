@@ -7,10 +7,12 @@ import {
   NativeModules,
   Text,
   Alert,
+  View,
 } from "react-native";
 import { Formik } from "formik";
 import styles from "../assets/appStyles";
-import client from "./client";
+import client from "../components/client";
+import validationSchema from "./addChores_valid";
 
 const AddChore = () => {
   const postedAlert = () => {
@@ -21,15 +23,12 @@ const AddChore = () => {
       },
     ]);
   };
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
+
   const handleSubmit = async (values) => {
     const data = new FormData();
     data.append("owner", values.owner);
     data.append("house", values.house);
     data.append("task", values.task);
-    data.append("dueDate", values.dueDate);
 
     try {
       const response = await client.post("/chores/create", data);
@@ -46,9 +45,9 @@ const AddChore = () => {
           owner: "",
           house: "",
           task: "",
-          dueDate: "",
         }}
         onSubmit={handleSubmit}
+        validationSchema={validationSchema}
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <SafeAreaView style={styles.content}>
@@ -74,13 +73,6 @@ const AddChore = () => {
                 onChangeText={handleChange("task")}
               />
               <Text style={styles.error}>{errors.task}</Text>
-              <DateTimePickerModal
-                mode="dueDate"
-                display="Chore Deadline?"
-                onConfirm={handleChange("dueDate")}
-                onCancel={hideDatePicker}
-              />
-              <Text style={styles.error}>{errors.dueDate}</Text>
               <Button
                 style={styles.addButton}
                 onPress={handleSubmit}

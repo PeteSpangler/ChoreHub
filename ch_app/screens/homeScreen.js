@@ -18,8 +18,18 @@ function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
       <Text style={styles.instructions}>Welcome to v1.0 of ChoreHub!</Text>
-      <Text style={styles.instructions}>Swipe Left to see the menu</Text>
-      <Text style={styles.instructions}>and get ready to add some chores!</Text>
+      <Text style={styles.instructions}>Swipe Left to login or register</Text>
+      <Text style={styles.instructions}>
+        then click below to add some chores!
+      </Text>
+      <Button
+        title="Add a Chore!"
+        onPress={() => navigation.navigate("Add Chore")}
+      />
+      <Button
+        title="Update a Chore!"
+        onPress={() => navigation.navigate("Update Chore")}
+      />
     </View>
   );
 }

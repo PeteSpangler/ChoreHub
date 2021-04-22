@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import * as Paper from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {

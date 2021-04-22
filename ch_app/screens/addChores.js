@@ -3,12 +3,12 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
-  Button,
   NativeModules,
   Text,
   Alert,
   View,
 } from "react-native";
+import { Button } from "react-native-paper";
 import { Formik } from "formik";
 import styles from "../assets/appStyles";
 import client from "../components/client";
@@ -74,10 +74,13 @@ const AddChore = () => {
               />
               <Text style={styles.error}>{errors.task}</Text>
               <Button
-                style={styles.addButton}
+                style={styles.Button}
+                mode="contained"
+                color="#1bb9ee"
                 onPress={handleSubmit}
-                title="Submit"
-              />
+              >
+                Submit
+              </Button>
             </View>
           </SafeAreaView>
         )}

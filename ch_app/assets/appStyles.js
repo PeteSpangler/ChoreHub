@@ -4,8 +4,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#5D3593",
-    alignItems: "center",
-    justifyContent: "center",
+    textAlign: "center",
+  },
+  Button: {
+    borderWidth: 20,
   },
   instructions: {
     color: "#1bb9ee",
@@ -21,26 +23,6 @@ const styles = StyleSheet.create({
     borderColor: "#007BFF",
     backgroundColor: "#007BFF",
     padding: 15,
-  },
-  button1: {
-    color: "#841584",
-    paddingTop: 5,
-    paddingBottom: 5,
-  },
-  button2: {
-    color: "#f194ff",
-    paddingTop: 5,
-    paddingBottom: 5,
-  },
-  button3: {
-    color: "green",
-  },
-  button4: {
-    color: "orange",
-  },
-  buttonText: {
-    fontSize: 20,
-    color: "#fff",
   },
   thumbnail: {
     width: 300,
@@ -68,12 +50,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     width: "100%",
     height: "100%",
-  },
-  addButton: {
-    borderWidth: 1,
-    borderColor: "#007BFF",
-    backgroundColor: "#007BFF",
-    padding: 15,
   },
   title: {
     fontSize: 30,

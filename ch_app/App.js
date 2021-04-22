@@ -1,6 +1,7 @@
 import "react-native-gesture-handler";
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { Provider as PaperProvider } from "react-native-paper";
 import {
   Button,
   Image,
@@ -30,13 +31,15 @@ ThemChores = () => (
 
 function App() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name="Home" children={this.ThemChores} />
-        <Drawer.Screen name="Login" component={LoginForm} />
-        <Drawer.Screen name="Register" component={RegForm} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <Drawer.Navigator>
+          <Drawer.Screen name="Home" children={this.ThemChores} />
+          <Drawer.Screen name="Login" component={LoginForm} />
+          <Drawer.Screen name="Register" component={RegForm} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 export default App;

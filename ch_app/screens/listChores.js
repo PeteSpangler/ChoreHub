@@ -13,9 +13,9 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Formik } from "formik";
 import styles from "../assets/appStyles";
 import client from "../components/client";
-import validationSchema from "./updateChores_valid";
+import validationSchema from "./listChores_valid";
 
-const UpdateChore = () => {
+const ChoreList = () => {
   const postedAlert = () => {
     Alert.alert("Success!", "Thank you! ", [
       {
@@ -73,4 +73,4 @@ const UpdateChore = () => {
     </View>
   );
 };
-export default UpdateChore;
+export default ChoreList;

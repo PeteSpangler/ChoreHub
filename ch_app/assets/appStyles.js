@@ -7,8 +7,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#532f84",
     textAlign: "center",
   },
+  choreContainer: {
+    marginTop: 20,
+    backgroundColor: "white",
+    overflow: "hidden",
+    flex: 1,
+    borderRadius: 15,
+  },
   updateChorepage: {
     flex: 1,
+    justifyContent: "center",
     backgroundColor: "#532f84",
     paddingTop: 25,
   },
@@ -64,6 +72,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 30,
     paddingBottom: 50,
+  },
+  cardInner: {
+    padding: 20,
+    flex: 1,
+    justifyContent: "center",
+    width: "100%",
+    height: 100,
+  },
+  cardTitle: {
+    fontSize: 28,
+    margin: 10,
+    fontWeight: "bold",
+    color: "black",
+    textAlign: "center",
   },
 });
 export default styles;

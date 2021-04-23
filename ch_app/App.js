@@ -8,7 +8,7 @@ import HomeScreen from "./screens/homeScreen";
 import LoginForm from "./components/loginForm";
 import RegForm from "./components/regForm";
 import AddChore from "./screens/addChores";
-import UpdateChore from "./screens/updateChore";
+import ChoreList from "./screens/listChores";
 import AppHeader from "./components/appHeader";
 
 const Stack = createStackNavigator();
@@ -22,7 +22,7 @@ ThemChores = () => (
   >
     <Stack.Screen name="Home" component={HomeScreen} />
     <Stack.Screen name="Add Chore" component={AddChore} />
-    <Stack.Screen name="Update Chore" component={UpdateChore} />
+    <Stack.Screen name="Chores List" component={ChoreList} />
   </Stack.Navigator>
 );
 

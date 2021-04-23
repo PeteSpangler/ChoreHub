@@ -28,7 +28,7 @@ function HomeScreen({ navigation }) {
           style={styles.Button}
           mode="contained"
           color="#1bb9ee"
-          onPress={() => navigation.navigate("Update Chore")}
+          onPress={() => navigation.navigate("Chores List")}
         >
           View all Chores
         </Button>

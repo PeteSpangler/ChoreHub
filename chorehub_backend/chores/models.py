@@ -9,11 +9,11 @@ class House(models.Model):
 class Chore(models.Model):
     task = models.CharField(max_length=200, blank=False)
     owner = models.CharField(max_length=100, blank=False)
-    dueDate = models.DateField(blank=True)
-    is_complete = models.BooleanField(default=False)
+    priority = models.IntegerField(blank=False)
+    isComplete = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{} must complete {} by {}".format(self.owner, self.task, self.dueDate)
+        return "{} must complete {}".format(self.owner, self.task)
 
 class Image(models.Model):
     chore = models.ForeignKey(Chore, on_delete=models.CASCADE, related_name="chore_images", blank=True)

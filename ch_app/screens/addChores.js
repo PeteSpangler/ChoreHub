@@ -28,6 +28,7 @@ const AddChore = () => {
     data.append("owner", values.owner);
     data.append("house", values.house);
     data.append("task", values.task);
+    data.append("priority", values.priority);
 
     try {
       const response = await client.post("/chores/create", data);
@@ -44,6 +45,7 @@ const AddChore = () => {
           owner: "",
           house: "",
           task: "",
+          priority: "",
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
@@ -72,6 +74,13 @@ const AddChore = () => {
                 onChangeText={handleChange("task")}
               />
               <Text style={styles.error}>{errors.task}</Text>
+              <TextInput
+                style={styles.textBox}
+                value={values.priority}
+                placeholder="Importance, scale of 1 to 10?"
+                onChangeText={handleChange("priority")}
+              />
+              <Text style={styles.error}>{errors.priority}</Text>
               <Button
                 style={styles.Button}
                 mode="contained"

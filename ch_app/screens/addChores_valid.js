@@ -15,6 +15,11 @@ const validationSchema = Yup.object({
     .max(200, "Must be less than 200 characters")
     .min(3, "Must be at least 3 characters")
     .required("Required"),
+
+  priority: Yup.number()
+    .max(10, "Choose a number from 1 to 10")
+    .min(1, "Choose a number from 1 to 10")
+    .required("Required"),
 });
 
 export default validationSchema;

@@ -1,10 +1,9 @@
 import { StyleSheet } from "react-native";
-import * as Paper from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#532f84",
+    backgroundColor: "#511F96",
     textAlign: "center",
   },
   choreContainer: {
@@ -17,14 +16,17 @@ const styles = StyleSheet.create({
   updateChorepage: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#532f84",
+    backgroundColor: "#511F96",
     paddingTop: 25,
   },
   Button: {
     borderWidth: 20,
   },
+  fab: {
+    position: "absolute",
+  },
   instructions: {
-    color: "#1bb9ee",
+    color: "#44CACB",
     fontSize: 22,
     textAlign: "center",
     fontWeight: "bold",
@@ -34,8 +36,8 @@ const styles = StyleSheet.create({
   },
   addButton: {
     borderWidth: 1,
-    borderColor: "#1bb9ee",
-    backgroundColor: "#1bb9ee",
+    borderColor: "#44CACB",
+    backgroundColor: "#44CACB",
     padding: 15,
   },
   thumbnail: {
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   textBox: {
-    borderColor: "#CCCCCC",
+    borderColor: "#8660B6",
     borderTopWidth: 1,
     borderBottomWidth: 1,
     height: 50,
@@ -61,13 +63,13 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 0,
-    backgroundColor: "#532f84",
+    backgroundColor: "#511F96",
     width: "100%",
     height: "100%",
   },
   title: {
     fontSize: 30,
-    color: "#1bb9ee",
+    color: "#44CACB",
     fontWeight: "bold",
     textAlign: "center",
     paddingTop: 30,

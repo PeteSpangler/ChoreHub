@@ -4,17 +4,23 @@ import { Platform, StyleSheet } from "react-native";
 
 const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots-vertical";
 
-export default function AppHeader({ navigation }) {
+export default function AppHeader() {
   return (
     <Appbar.Header style={styles.header}>
       <Appbar.Content title="ChoreHub" />
-      <Appbar.Action icon={MORE_ICON} onPress={() => navigation.openDrawer()} />
+      <Appbar.Action
+        icon={MORE_ICON}
+        onPress={() => {
+          alert("this button dont work fool");
+        }}
+      />
     </Appbar.Header>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
+    backgroundColor: "#511F96",
     paddingTop: 15,
   },
 });

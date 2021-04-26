@@ -4,7 +4,6 @@ import client from "./client";
 import styles from "../assets/appStyles";
 import { Formik } from "formik";
 import { Button, TextInput } from "react-native-paper";
-import AppHeader_LoginReg from "./appHeader_LoginReg";
 
 const LoginForm = () => {
   const handleSubmit = async (values) => {
@@ -22,7 +21,6 @@ const LoginForm = () => {
 
   return (
     <View>
-      <AppHeader_LoginReg />
       <Formik
         initialValues={{
           username: "",

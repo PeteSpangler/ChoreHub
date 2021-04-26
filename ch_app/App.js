@@ -3,40 +3,56 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { QueryClientProvider, QueryClient } from "react-query";
 import HomeScreen from "./screens/homeScreen";
-import LoginForm from "./components/loginForm";
-import RegForm from "./components/regForm";
 import AddChore from "./screens/addChores";
 import ChoreList from "./screens/listChores";
 import AppHeader from "./components/appHeader";
+import AddHouse from "./screens/addHouse";
+import HouseForm from "./screens/houseForm";
 
-const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
+const queryClient = new QueryClient();
 
-ThemChores = () => (
-  <Stack.Navigator
-    screenOptions={{
-      header: (props) => <AppHeader {...props} />,
-    }}
-  >
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="Add Chore" component={AddChore} />
-    <Stack.Screen name="Chores List" component={ChoreList} />
-  </Stack.Navigator>
-);
+const HomeStack = createStackNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator
+      initialRouteName="Home Screen"
+      screenOptions={{
+        header: (props) => <AppHeader {...props} />,
+      }}
+    >
+      <HomeStack.Screen name="Home Screen" component={HomeScreen} />
+      <HomeStack.Screen name="Add Chore" component={AddChore} />
+      <HomeStack.Screen name="Chores List" component={ChoreList} />
+    </HomeStack.Navigator>
+  );
+}
+const Tab = createMaterialBottomTabNavigator();
+const AddButton = "plus-box";
 
 function App() {
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Drawer.Navigator drawerPosition="right">
-          <Drawer.Screen name="Home" component={ThemChores} />
-          <Drawer.Screen name="Login" component={LoginForm} />
-          <Drawer.Screen name="Register" component={RegForm} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <QueryClientProvider client={queryClient}>
+      <PaperProvider>
+        <NavigationContainer>
+          <AppHeader />
+          <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeStackScreen} />
+            <Tab.Screen name="Chores" component={ChoreList} />
+            <Tab.Screen
+              name="Add"
+              component={AddChore}
+              options={{ tabBarIcon: AddButton }}
+            />
+            <Tab.Screen name="Create House" component={HouseForm} />
+            <Tab.Screen name="Join House" component={AddHouse} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </QueryClientProvider>
   );
 }
 export default App;

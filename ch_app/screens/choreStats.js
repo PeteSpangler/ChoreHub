@@ -12,14 +12,15 @@ import { Formik } from "formik";
 import styles from "../assets/appStyles";
 import client from "../components/client";
 
-const AddHouse = () => {
+const ChoreStats = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        This is where you would add a house to join!
+        This is where you would see the total chores completed by you and your
+        household!
       </Text>
     </View>
   );
 };
 
-export default AddHouse;
+export default ChoreStats;

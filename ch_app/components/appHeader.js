@@ -11,7 +11,9 @@ export default function AppHeader() {
       <Appbar.Action
         icon={MORE_ICON}
         onPress={() => {
-          alert("this button dont work fool");
+          alert(
+            "This will say the current users name soon, instead of a crappy button that doesnt work!"
+          );
         }}
       />
     </Appbar.Header>

@@ -11,26 +11,22 @@ function HomeScreen({ navigation }) {
     <View style={[styles.container, { flexDirection: "column" }]}>
       <Image source={logo} style={styles.logo} />
       <Text style={styles.instructions}>Welcome to v1.0 of ChoreHub!</Text>
-      <Text style={styles.instructions}>Swipe right to login or register</Text>
-      <Text style={styles.instructions}>
-        then click below to add some chores!
-      </Text>
       <View style={[styles.container, { flexDirection: "column" }]}>
         <Button
           style={styles.Button}
           mode="contained"
           color="#1bb9ee"
-          onPress={() => navigation.navigate("Add Chore")}
+          onPress={() => navigation.navigate("Register")}
         >
-          Add a Chore
+          Register!
         </Button>
         <Button
           style={styles.Button}
           mode="contained"
           color="#1bb9ee"
-          onPress={() => navigation.navigate("Chores List")}
+          onPress={() => navigation.navigate("Login")}
         >
-          View all Chores
+          Login!
         </Button>
       </View>
     </View>

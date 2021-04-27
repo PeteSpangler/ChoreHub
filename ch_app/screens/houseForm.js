@@ -16,7 +16,7 @@ const HouseForm = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        This is where you would create a house to join!
+        This is where you would create or join a house!
       </Text>
     </View>
   );

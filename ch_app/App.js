@@ -6,10 +6,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { QueryClientProvider, QueryClient } from "react-query";
 import HomeScreen from "./screens/homeScreen";
+import RegForm from "./components/regForm";
+import LoginForm from "./components/loginForm";
 import AddChore from "./screens/addChores";
 import ChoreList from "./screens/listChores";
 import AppHeader from "./components/appHeader";
-import AddHouse from "./screens/addHouse";
+import ChoreStats from "./screens/choreStats";
 import HouseForm from "./screens/houseForm";
 
 const queryClient = new QueryClient();
@@ -19,19 +21,18 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator
-      initialRouteName="Home Screen"
       screenOptions={{
         header: (props) => <AppHeader {...props} />,
       }}
     >
       <HomeStack.Screen name="Home Screen" component={HomeScreen} />
-      <HomeStack.Screen name="Add Chore" component={AddChore} />
-      <HomeStack.Screen name="Chores List" component={ChoreList} />
+      <HomeStack.Screen name="Login" component={LoginForm} />
+      <HomeStack.Screen name="Register" component={RegForm} />
     </HomeStack.Navigator>
   );
 }
+
 const Tab = createMaterialBottomTabNavigator();
-const AddButton = "plus-box";
 
 function App() {
   return (
@@ -39,16 +40,32 @@ function App() {
       <PaperProvider>
         <NavigationContainer>
           <AppHeader />
-          <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeStackScreen} />
-            <Tab.Screen name="Chores" component={ChoreList} />
+          <Tab.Navigator initialRouteName="Home Screen">
+            <Tab.Screen
+              name="Home"
+              component={HomeStackScreen}
+              options={{ tabBarIcon: "home-heart" }}
+            />
+            <Tab.Screen
+              name="Chores"
+              component={ChoreList}
+              options={{ tabBarIcon: "broom" }}
+            />
             <Tab.Screen
               name="Add"
               component={AddChore}
-              options={{ tabBarIcon: AddButton }}
+              options={{ tabBarIcon: "plus-box" }}
             />
-            <Tab.Screen name="Create House" component={HouseForm} />
-            <Tab.Screen name="Join House" component={AddHouse} />
+            <Tab.Screen
+              name="Create House"
+              component={HouseForm}
+              options={{ tabBarIcon: "home-plus" }}
+            />
+            <Tab.Screen
+              name="Chore Stats"
+              component={ChoreStats}
+              options={{ tabBarIcon: "clipboard-check" }}
+            />
           </Tab.Navigator>
         </NavigationContainer>
       </PaperProvider>

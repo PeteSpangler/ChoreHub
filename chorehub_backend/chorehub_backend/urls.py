@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('chores.urls')),
+    path('api/v1/', include('chores.urls')),
     path('api-token-auth/', views.obtain_auth_token),
     path('register/', UserCreateView.as_view(), name='create_user'),
  ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

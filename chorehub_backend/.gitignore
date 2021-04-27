@@ -6,3 +6,4 @@ env.sh
 .deployment
 *.__pycache__*
 db.sqlite3
+backend

@@ -15,7 +15,7 @@ const ListView = ({ navigation }) => {
   const [data, setData] = useState([]);
 
   const getList = async () => {
-    console.log("http://127.0.0.1:8000/");
+    console.log(client);
     const response = await axios.get("http://127.0.0.1:8000/api/chores/");
     setData(response.data);
   };

@@ -10,6 +10,7 @@ import RegForm from "./components/regForm";
 import LoginForm from "./components/loginForm";
 import AddChore from "./screens/addChores";
 import ChoreList from "./screens/listChores";
+import ChoreView from "./screens/viewChores";
 import AppHeader from "./components/appHeader";
 import ChoreStats from "./screens/choreStats";
 import HouseForm from "./screens/houseForm";
@@ -28,6 +29,7 @@ function HomeStackScreen() {
       <HomeStack.Screen name="Home Screen" component={HomeScreen} />
       <HomeStack.Screen name="Login" component={LoginForm} />
       <HomeStack.Screen name="Register" component={RegForm} />
+      <HomeStack.Screen name="Details" component={ChoreView} />
     </HomeStack.Navigator>
   );
 }

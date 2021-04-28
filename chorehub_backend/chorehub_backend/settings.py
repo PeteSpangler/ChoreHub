@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #3rd party apps
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 
     #My Apps
     'chores.apps.ChoresConfig',
@@ -55,12 +56,20 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'exp://192.168.1.74:19000',
+)
+
 
 ROOT_URLCONF = 'chorehub_backend.urls'
 

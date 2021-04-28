@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class House(models.Model):
     house = models.CharField(max_length=200, blank=False, default="Home")
     choresCompleted = models.IntegerField(null=False, default=1)
+    member = models.ForeignKey(User, on_delete = models.CASCADE, blank=False)
     
     def __str__(self):
         return "{} has completed {} chores!".format(self.house, self.choresCompleted)
@@ -19,10 +20,10 @@ class Chore(models.Model):
 
 
     def __str__(self):
-        return "On a scale from 1 to 10, our need for {} is a {}".format(self.task, self.priority)
+        return "We need {} to {}".format(self.owner, self.task)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['-priority']
 
 class Image(models.Model):
     chore = models.ForeignKey(Chore, on_delete=models.CASCADE, related_name="chore_images", blank=False)

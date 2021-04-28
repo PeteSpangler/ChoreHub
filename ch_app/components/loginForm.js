@@ -12,7 +12,7 @@ const LoginForm = () => {
     data.append("password", values.password);
     try {
       console.log(data);
-      const response = await client.post("/api-token-auth/", data);
+      const response = await client.post("api-token-auth/", data);
       alert(response.data.token);
     } catch (error) {
       console.log(error);

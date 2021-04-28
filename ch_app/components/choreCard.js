@@ -3,7 +3,7 @@ import { Text } from "react-native";
 import { Button, Card } from "react-native-paper";
 import styles from "../assets/appStyles";
 
-const choreCard = ({ owner, house, task, priority }) => {
+const ChoreCard = ({ owner, house, task, priority }) => {
   return (
     <Card style={styles.choreContainer}>
       <Card.Content style={styles.cardInner}>
@@ -20,4 +20,4 @@ const choreCard = ({ owner, house, task, priority }) => {
   );
 };
 
-export default choreCard;
+export default ChoreCard;

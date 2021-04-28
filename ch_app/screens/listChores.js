@@ -30,7 +30,7 @@ const ChoreList = () => {
 
     // route to chosen chore url, so maybe absoluteurl?
     try {
-      const response = await client.patch("/chores/{chore.id}", data);
+      const response = await client.put("chores/update/{data.id}", data);
       postedAlert(response);
     } catch (error) {
       console.log(error);

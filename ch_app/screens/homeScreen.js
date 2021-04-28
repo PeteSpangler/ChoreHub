@@ -28,6 +28,14 @@ function HomeScreen({ navigation }) {
         >
           Login!
         </Button>
+        <Button
+          style={styles.Button}
+          mode="contained"
+          color="#1bb9ee"
+          onPress={() => navigation.navigate("Details")}
+        >
+          See Them Chores!
+        </Button>
       </View>
     </View>
   );

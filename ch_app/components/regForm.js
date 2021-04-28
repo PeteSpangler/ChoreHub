@@ -12,7 +12,7 @@ const RegForm = () => {
     data.append("password", values.password);
     try {
       console.log(data);
-      const response = await client.post("/register/", data);
+      const response = await client.post("register/", data);
       alert(response.data);
     } catch (error) {
       console.log(error);

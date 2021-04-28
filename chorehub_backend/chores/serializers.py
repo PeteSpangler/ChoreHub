@@ -37,7 +37,6 @@ class ChoreListSerializer(serializers.ModelSerializer):
             'absolute_url',
 
         ]
-
     
     def get_absolute_url(self, obj):
         return reverse('chore_detail', args=(obj.pk,))
@@ -81,6 +80,7 @@ class HouseDetailSerializer(serializers.ModelSerializer):
             'id',
             'house',
             'choresCompleted',
+            'member',
             'absolute_url',
         ]
 

@@ -25,7 +25,20 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+if DEBUG is True:
+    ALLOWED_HOSTS = ['*']
+    CORS_ORIGIN_ALLOW_ALL = True
+else:
+    ALLOWED_HOSTS = ['https://chorehubdrf.azurewebsites.net']
+    SECURE_HSTS_SECONDS=5
+    SECURE_SSL_REDIRECT=True
+    SESSION_COOKIE_SECURE=True
+    CSRF_COOKIE_SECURE=True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+    SECURE_HSTS_PRELOAD=True
+    CORS_ALLOWED_ORIGINS = [
+        "https://chorehubdrf.azurewebsites.net",
+    ]
 
 
 # Application definition
@@ -55,6 +68,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,14 +77,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-    'http://localhost:8000',
-    'exp://192.168.1.74:19000',
-    'http://localhost:19002/',
-)
-
 
 ROOT_URLCONF = 'chorehub_backend.urls'
 
@@ -152,12 +158,12 @@ USE_TZ = True
 
 if DEBUG is True:
     STATIC_URL = '/static/'
-    STATIC_ROOT = '/static/'
-    STATICFILES_DIRS = [Path(BASE_DIR, "static")]
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = Path(BASE_DIR, 'media')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 else:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATIC_URL = '/static/'
-    STATICFILES_DIRS = [Path(BASE_DIR, '/site/www/static/')]
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = Path(BASE_DIR, '/site/www/media/')
+    # STATICFILES_DIRS = [Path(BASE_DIR, '/site/www/static/')]
+    MEDIA_URL = '/proof/'
+    MEDIA_ROOT = Path(BASE_DIR, '/site/www/proof/')

@@ -27,7 +27,7 @@ class Chore(models.Model):
 
 class Image(models.Model):
     chore = models.ForeignKey(Chore, on_delete=models.CASCADE, related_name="chore_images", blank=False)
-    proof = models.ImageField(upload_to="media/proof", blank=True)
+    proof = models.ImageField(upload_to="proof", blank=True)
     uploaded_at = models.DateField(auto_now_add=True)
 
     class Meta:

@@ -4,7 +4,7 @@ import client from "../components/client";
 import ChoreCard from "../components/choreCard";
 import { SafeAreaView, View, FlatList } from "react-native";
 
-const ChoreView = ({ navigation }) => {
+const ChoreDetail = ({ navigation }) => {
   const [data, setData] = useState([]);
   const getChore = async () => {
     console.log(client);
@@ -47,4 +47,4 @@ const ChoreView = ({ navigation }) => {
   );
 };
 
-export default ChoreView;
+export default ChoreDetail;

@@ -1,20 +1,22 @@
 import React from "react";
 import { Text, View, SafeAreaView } from "react-native";
-import { Button, TextInput } from "react-native-paper";
-import client from "./client";
+import client from "../components/client";
 import styles from "../assets/appStyles";
 import { Formik } from "formik";
+import { Button, TextInput } from "react-native-paper";
 
-const RegForm = () => {
+const LoginForm = () => {
   const handleSubmit = async (values) => {
     const data = new FormData();
     data.append("username", values.username);
     data.append("password", values.password);
     try {
       console.log(data);
-      const response = await post("http://127.0.0.1:8000/register/", data);
-      console.log(response.data);
-      alert(response.data);
+      const response = await client.post(
+        "http://127.0.0.1:8000/api-token-auth/",
+        data
+      );
+      alert(response.data.token);
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +34,7 @@ const RegForm = () => {
         {({ handleChange, handleSubmit, values, errors }) => (
           <SafeAreaView style={styles.content}>
             <View style={styles.container}>
-              <Text style={styles.title}>Register an account!</Text>
+              <Text style={styles.title}>Login to your account</Text>
               <TextInput
                 style={styles.textBox}
                 value={values.username}
@@ -53,8 +55,9 @@ const RegForm = () => {
                 mode="contained"
                 color="#1bb9ee"
                 onPress={handleSubmit}
+                title="Submit"
               >
-                Register and Get It Done!
+                Login and Get it Done!
               </Button>
             </View>
           </SafeAreaView>
@@ -64,4 +67,4 @@ const RegForm = () => {
   );
 };
 
-export default RegForm;
+export default LoginForm;

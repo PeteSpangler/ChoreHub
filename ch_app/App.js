@@ -6,13 +6,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { QueryClientProvider, QueryClient } from "react-query";
 import HomeScreen from "./screens/homeScreen";
-import RegForm from "./components/regForm";
-import LoginForm from "./components/loginForm";
+import RegForm from "./screens/regForm";
+import LoginForm from "./screens/loginForm";
 import AddChore from "./screens/addChores";
 import ChoreList from "./screens/listChores";
-import ChoreView from "./screens/viewChores";
+import ChoreDetail from "./screens/choreDetails";
 import AppHeader from "./components/appHeader";
-import ChoreStats from "./screens/choreStats";
+import Stats from "./screens/choreStats";
 import HouseForm from "./screens/houseForm";
 
 const queryClient = new QueryClient();
@@ -23,13 +23,13 @@ function HomeStackScreen() {
   return (
     <HomeStack.Navigator
       screenOptions={{
-        header: (props) => <AppHeader {...props} />,
+        headerShown: false,
       }}
     >
       <HomeStack.Screen name="Home Screen" component={HomeScreen} />
       <HomeStack.Screen name="Login" component={LoginForm} />
       <HomeStack.Screen name="Register" component={RegForm} />
-      <HomeStack.Screen name="Details" component={ChoreView} />
+      <HomeStack.Screen name="Details" component={ChoreDetail} />
     </HomeStack.Navigator>
   );
 }
@@ -64,8 +64,8 @@ function App() {
               options={{ tabBarIcon: "home-plus" }}
             />
             <Tab.Screen
-              name="Chore Stats"
-              component={ChoreStats}
+              name="Stats"
+              component={Stats}
               options={{ tabBarIcon: "clipboard-check" }}
             />
           </Tab.Navigator>

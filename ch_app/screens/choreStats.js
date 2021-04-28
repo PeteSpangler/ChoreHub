@@ -12,7 +12,7 @@ import { Formik } from "formik";
 import styles from "../assets/appStyles";
 import client from "../components/client";
 
-const ChoreStats = () => {
+const Stats = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -23,4 +23,4 @@ const ChoreStats = () => {
   );
 };
 
-export default ChoreStats;
+export default Stats;

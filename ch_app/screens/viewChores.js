@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../assets/appStyles";
 import client from "../components/client";
-import styles from "../assets/appStyles";
 import ChoreCard from "../components/choreCard";
 import { SafeAreaView, View, FlatList } from "react-native";
 

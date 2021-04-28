@@ -12,7 +12,8 @@ const RegForm = () => {
     data.append("password", values.password);
     try {
       console.log(data);
-      const response = await client.post("register/", data);
+      const response = await post("http://127.0.0.1:8000/register/", data);
+      console.log(response.data);
       alert(response.data);
     } catch (error) {
       console.log(error);

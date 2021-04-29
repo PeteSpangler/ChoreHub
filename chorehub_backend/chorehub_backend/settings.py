@@ -29,16 +29,10 @@ if DEBUG is True:
     ALLOWED_HOSTS = ['*']
     CORS_ORIGIN_ALLOW_ALL = True
 else:
-    ALLOWED_HOSTS = ['https://chorehubdrf.azurewebsites.net']
-    SECURE_HSTS_SECONDS=5
+    ALLOWED_HOSTS = ['chorehubdrf.azurewebsites.net']
     SECURE_SSL_REDIRECT=True
     SESSION_COOKIE_SECURE=True
     CSRF_COOKIE_SECURE=True
-    SECURE_HSTS_INCLUDE_SUBDOMAINS=True
-    SECURE_HSTS_PRELOAD=True
-    CORS_ALLOWED_ORIGINS = [
-        "https://chorehubdrf.azurewebsites.net",
-    ]
 
 
 # Application definition
@@ -67,10 +61,10 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

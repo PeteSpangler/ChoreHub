@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, SafeAreaView } from "react-native";
+import { Text, View, SafeAreaView, NativeModules } from "react-native";
 import client from "../components/client";
 import styles from "../assets/appStyles";
 import { Formik } from "formik";
@@ -11,12 +11,14 @@ const LoginForm = () => {
     data.append("username", values.username);
     data.append("password", values.password);
     try {
-      console.log(data);
-      const response = await client.post(
-        "http://127.0.0.1:8000/api-token-auth/",
-        data
-      );
-      alert(response.data.token);
+      const response = await client.post("api-token-auth/", data);
+      console.log(response.data.token);
+      alert("Success!", "Thank you! ", [
+        {
+          text: "Go to main screen",
+          onPress: () => NativeModules.DevSettings.reload(),
+        },
+      ]);
     } catch (error) {
       console.log(error);
     }

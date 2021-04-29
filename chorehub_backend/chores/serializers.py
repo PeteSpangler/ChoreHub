@@ -85,4 +85,4 @@ class HouseDetailSerializer(serializers.ModelSerializer):
         ]
 
     def get_absolute_url(self, obj):
-        return reverse('home_detail', args=(obj.pk,))
+        return reverse('house_detail', args=(obj.pk,))

@@ -23,16 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if DEBUG is True:
     ALLOWED_HOSTS = ['*']
     CORS_ORIGIN_ALLOW_ALL = True
 else:
-    ALLOWED_HOSTS = ['chorehubdrf.azurewebsites.net']
-    SECURE_SSL_REDIRECT=True
-    SESSION_COOKIE_SECURE=True
-    CSRF_COOKIE_SECURE=True
+    ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME'], '127.0.0.1']
+    CORS_ORIGIN_ALLOW_ALL = True
+
 
 
 # Application definition
@@ -63,7 +62,6 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -152,12 +150,14 @@ USE_TZ = True
 
 if DEBUG is True:
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-else:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATIC_URL = '/static/'
-    # STATICFILES_DIRS = [Path(BASE_DIR, '/site/www/static/')]
+    STATIC_ROOT = '/static/'
+    STATICFILES_DIRS = [
+        Path(BASE_DIR, "static")
+    ]
     MEDIA_URL = '/proof/'
-    MEDIA_ROOT = Path(BASE_DIR, '/site/www/proof/')
+    MEDIA_ROOT = Path(BASE_DIR, 'proof')
+else:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = '/var/www/static/'
+    MEDIA_URL = '/proof/'
+    MEDIA_ROOT = Path(BASE_DIR, '/var/site/www/proof/')

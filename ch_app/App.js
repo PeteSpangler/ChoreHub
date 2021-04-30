@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { Provider as PaperProvider } from "react-native-paper";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { QueryClientProvider, QueryClient } from "react-query";
@@ -14,6 +14,15 @@ import ChoreDetail from "./screens/choreDetails";
 import AppHeader from "./components/appHeader";
 import Stats from "./screens/choreStats";
 import HouseForm from "./screens/houseForm";
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "#511F96",
+    accent: "#44CACB",
+  },
+};
 
 const queryClient = new QueryClient();
 
@@ -44,7 +53,7 @@ const Tab = createMaterialBottomTabNavigator();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <PaperProvider>
+      <PaperProvider theme={theme}>
         <NavigationContainer>
           <AppHeader />
           <Tab.Navigator initialRouteName="Home Screen">

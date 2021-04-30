@@ -18,19 +18,24 @@ import HouseForm from "./screens/houseForm";
 const queryClient = new QueryClient();
 
 const HomeStack = createStackNavigator();
-
+// This should be the authentication flow bozo
 function HomeStackScreen() {
   return (
-    <HomeStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="Home Screen" component={HomeScreen} />
       <HomeStack.Screen name="Login" component={LoginForm} />
       <HomeStack.Screen name="Register" component={RegForm} />
-      <HomeStack.Screen name="Details" component={ChoreDetail} />
     </HomeStack.Navigator>
+  );
+}
+
+const ChoreStack = createStackNavigator();
+function ChoreStackScreen() {
+  return (
+    <ChoreStack.Navigator screenOptions={{ headerShown: false }}>
+      <ChoreStack.Screen name="Chore List" component={ChoreList} />
+      <ChoreStack.Screen name="Details" component={ChoreDetail} />
+    </ChoreStack.Navigator>
   );
 }
 
@@ -50,7 +55,7 @@ function App() {
             />
             <Tab.Screen
               name="Chores"
-              component={ChoreList}
+              component={ChoreStackScreen}
               options={{ tabBarIcon: "broom" }}
             />
             <Tab.Screen

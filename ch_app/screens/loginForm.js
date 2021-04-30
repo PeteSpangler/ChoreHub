@@ -50,6 +50,7 @@ const LoginForm = () => {
                 value={values.password}
                 placeholder="Password"
                 onChangeText={handleChange("password")}
+                secureTextEntry={true}
               />
               <Text style={styles.error}>{errors.password}</Text>
               <Button

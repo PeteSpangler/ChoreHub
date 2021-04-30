@@ -6,13 +6,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#511F96",
     textAlign: "center",
   },
-  choreContainer: {
-    marginTop: 20,
-    backgroundColor: "white",
-    overflow: "hidden",
-    flex: 1,
-    borderRadius: 15,
-  },
   updateChorepage: {
     flex: 1,
     justifyContent: "center",

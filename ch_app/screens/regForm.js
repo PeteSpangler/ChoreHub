@@ -51,6 +51,7 @@ const RegForm = () => {
                 style={styles.textBox}
                 value={values.password}
                 placeholder="Password"
+                secureTextEntry={true}
                 onChangeText={handleChange("password")}
               />
               <Text style={styles.error}>{errors.password}</Text>

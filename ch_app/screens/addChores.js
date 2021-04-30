@@ -26,12 +26,11 @@ const AddChore = () => {
   const handleSubmit = async (values) => {
     const data = new FormData();
     data.append("owner", values.owner);
-    data.append("house", values.house);
     data.append("task", values.task);
     data.append("priority", values.priority);
 
     try {
-      const response = await client.post("/chores/create", data);
+      const response = await client.post("api/v1/chores/create/", data);
       postedAlert(response);
     } catch (error) {
       console.log(error);
@@ -60,13 +59,6 @@ const AddChore = () => {
                 onChangeText={handleChange("owner")}
               />
               <Text style={styles.error}>{errors.owner}</Text>
-              <TextInput
-                style={styles.textBox}
-                value={values.house}
-                placeholder="What is the house/address?"
-                onChangeText={handleChange("house")}
-              />
-              <Text style={styles.error}>{errors.house}</Text>
               <TextInput
                 style={styles.textBox}
                 value={values.task}

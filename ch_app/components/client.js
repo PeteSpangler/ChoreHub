@@ -1,6 +1,8 @@
 import axios from "axios";
 // import { API_URL } from "@env";
 
-export const client = axios.create({
+const client = axios.create({
   baseURL: "https://chorehubdrf.azurewebsites.net/",
 });
+
+export default client;

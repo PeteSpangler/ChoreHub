@@ -57,6 +57,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',  
     ],
+    'DEFAULT_PERMISSIONS_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
 }
 
 MIDDLEWARE = [
@@ -160,4 +163,4 @@ else:
     STATIC_URL = '/static/'
     STATIC_ROOT = '/home/site/wwwroot/static/'
     MEDIA_URL = '/proof/'
-    MEDIA_ROOT = Path(BASE_DIR, '/home/site/wwwroot/proof/')
+    MEDIA_ROOT = '/home/site/wwwroot/proof/'

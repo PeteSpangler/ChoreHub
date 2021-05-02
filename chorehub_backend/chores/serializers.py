@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Chore, House, Image
+from .models import Chore, Image
 from rest_framework.reverse import reverse
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
@@ -53,22 +53,6 @@ class ChoreDetailSerializer(serializers.ModelSerializer):
 
     def get_delete(self, obj):
         return reverse('chore_delete', args=(obj.pk,))
-
-class HouseDetailSerializer(serializers.ModelSerializer):
-    absolute_url = serializers.SerializerMethodField()
-
-    class Meta:
-        model = House
-        fields = [
-            'id',
-            'house',
-            'choresCompleted',
-            'member',
-            'absolute_url',
-        ]
-
-    def get_absolute_url(self, obj):
-        return reverse('house_detail', args=(obj.pk,))
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)

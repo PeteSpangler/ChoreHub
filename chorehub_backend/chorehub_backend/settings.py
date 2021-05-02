@@ -93,7 +93,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chorehub_backend.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 # if DEBUG is True:
@@ -163,4 +162,4 @@ else:
     STATIC_URL = '/static/'
     STATIC_ROOT = '/home/site/wwwroot/static/'
     MEDIA_URL = '/proof/'
-    MEDIA_ROOT = '/home/site/wwwroot/proof/'
+    MEDIA_ROOT = Path(BASE_DIR, '/home/site/wwwroot/proof/')

@@ -7,9 +7,9 @@ const ChoreCard = ({ pic, person, action, importance }) => {
     <Card>
       <Card.Cover source={{ uri: pic }} />
       <Card.Content>
-        <Title>{person}</Title>
+        <Title>Owner: {person}</Title>
         <Paragraph>{action}</Paragraph>
-        <Paragraph>{importance}</Paragraph>
+        <Paragraph>Priority: {importance}</Paragraph>
       </Card.Content>
     </Card>
   );

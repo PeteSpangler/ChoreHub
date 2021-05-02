@@ -27,6 +27,13 @@ const styles = StyleSheet.create({
   logo: {
     resizeMode: "contain",
   },
+  details: {
+    fontSize: 15,
+    margin: 10,
+    fontWeight: "bold",
+    color: "blue",
+    textAlign: "center",
+  },
   addButton: {
     borderWidth: 1,
     borderColor: "#44CACB",
@@ -75,11 +82,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 100,
   },
-  cardTitle: {
-    fontSize: 28,
-    margin: 10,
-    fontWeight: "bold",
-    color: "black",
+  cardDetails: {
+    fontSize: 10,
+    color: "#44CACB",
     textAlign: "center",
   },
 });

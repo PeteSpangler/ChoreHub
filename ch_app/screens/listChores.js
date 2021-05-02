@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  TextInput,
-  NativeModules,
-  Text,
-  Alert,
-  View,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
+import { View, TouchableOpacity, FlatList } from "react-native";
 import { Button } from "react-native-paper";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { Formik } from "formik";
 import ChoreCard from "../components/choreCard";
 import styles from "../assets/appStyles";
 import client from "../components/client";
@@ -22,6 +11,7 @@ const ChoreList = ({ navigation }) => {
   const getChoreList = async () => {
     console.log(client);
     const response = await client.get("api/v1/chores/");
+    console.log(response.config);
     setData(response.data);
   };
 
@@ -30,31 +20,30 @@ const ChoreList = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("Details", {
-                    objurl: item.absolute_url,
-                  });
-                }}
-              >
-                <ChoreCard
-                  owner={item.owner}
-                  task={item.task}
-                  priority={item.priority}
-                />
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Details", {
+                  objurl: item.absolute_url,
+                });
+              }}
+            >
+              <ChoreCard
+                pic={item.ch_image}
+                person={item.owner}
+                action={item.task}
+                importance={item.priority}
+              />
+            </TouchableOpacity>
+          );
+        }}
+      />
+    </View>
   );
 };
 

@@ -8,12 +8,6 @@ export default function AppHeader() {
   return (
     <Appbar.Header style={styles.header}>
       <Appbar.Content title="ChoreHub" />
-      <Appbar.Action
-        icon={MORE_ICON}
-        onPress={() => {
-          alert("This will say the current users name instead of a button");
-        }}
-      />
     </Appbar.Header>
   );
 }

@@ -1,54 +1,66 @@
+import React, { useEffect } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+  Alert,
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import * as Sharing from "expo-sharing";
-import uploadToAnonymousFilesAsync from "anonymous-files";
-import styles from "./assets/appStyles";
-import { Image, Platform, Text, TouchableOpacity, View } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
 
-const [selectedImage, setSelectedImage] = React.useState(null);
-
-let openImagePickerAsync = async () => {
-  let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-  if (permissionResult.granted === false) {
-    alert("Permission to access camera roll is required!");
-    return;
-  }
-
-  let pickerResult = await ImagePicker.launchImageLibraryAsync();
-
-  if (pickerResult.cancelled === true) {
-    return;
-  }
-  if (Platform.OS === "web") {
-    let remoteUri = await uploadToAnonymousFilesAsync(pickerResult.uri);
-    setSelectedImage({ localUri: pickerResult.url, remoteUri });
-  } else {
-    setSelectedImage({ localUri: pickerResult.uri, remoteUri: null });
-  }
-
-  let openShareDialogAsync = async () => {
-    if (!(await Sharing.isAvailableAsync())) {
-      alert(
-        `Uh oh, sharing isnt available on your platform, but is available at: ${selectedImage.remoteUri}`
-      );
-      return;
+const PhotoPicker = ({ photo, onPressPhoto }) => {
+  const getPermission = async () => {
+    const { status } = await ImagePicker.getCameraPermissionsAsync();
+    if (status !== "granted") {
+      alert("Enable camera roll permissions");
     }
-
-    await Sharing.shareAsync(selectedImage.localUri);
   };
+  useEffect(() => {
+    getPermission();
+  }, []);
 
-  if (selectedImage !== null) {
-    return (
+  const selectPhoto = async () => {
+    try {
+      const result = await ImagePicker.launchCameraAsync();
+      if (!result.cancelled) onPressPhoto(result.uri);
+    } catch (error) {
+      alert("Error, try again");
+    }
+  };
+  const onPress = () => {
+    if (photo == "") selectPhoto();
+    else
+      Alert.alert("Photo", "Would you like to use another photo? ", [
+        { text: "Yes", onPress: () => selectPhoto() },
+        { text: "No, keep it!" },
+      ]);
+  };
+  return (
+    <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
-        <Image
-          source={{ uri: selectedImage.localUri }}
-          style={styles.thumbnail}
-        />
-        <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
-          <Text styles={styles.buttonText}>Share this photo</Text>
-        </TouchableOpacity>
+        {photo == "" ? (
+          <SimpleLineIcons name="picture" size={100} color="black" />
+        ) : (
+          <Image style={styles.img} source={{ uri: photo }} />
+        )}
       </View>
-    );
-  }
+    </TouchableWithoutFeedback>
+  );
 };
-export default openImagePickerAsync;
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    backgroundColor: "white",
+  },
+  img: {
+    width: 100,
+    height: 100,
+    marginTop: 20,
+    marginBottom: 20,
+    overflow: "hidden",
+    borderRadius: 10,
+  },
+});
+export default PhotoPicker;

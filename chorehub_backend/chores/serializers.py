@@ -33,9 +33,9 @@ class ChoreListSerializer(serializers.ModelSerializer):
             'task',
             'owner',
             'priority',
+            'ch_image',
             'isComplete',
             'absolute_url',
-
         ]
     
     def get_absolute_url(self, obj):
@@ -51,7 +51,6 @@ class ChoreDetailSerializer(serializers.ModelSerializer):
     update = serializers.SerializerMethodField()
     delete = serializers.SerializerMethodField()
     chore_images = ImageSerializer(many=True, required=False)
-
     class Meta:
         model = Chore
         fields = [
@@ -59,11 +58,12 @@ class ChoreDetailSerializer(serializers.ModelSerializer):
             'task',
             'owner',
             'priority',
+            'ch_image',
             'isComplete',
             'chore_images',
             'update',
             'delete',
-        ]
+          ]
 
     def get_update(self, obj):
         return reverse('chore_update', args=(obj.pk,))

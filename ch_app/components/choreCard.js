@@ -1,17 +1,17 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { Button, Card } from "react-native-paper";
+import { Card, Title, Paragraph } from "react-native-paper";
 import styles from "../assets/appStyles";
 
-const ChoreCard = ({ owner, task, priority }) => {
+const ChoreCard = ({ pic, person, action, importance }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.cardInner}>
-        <Text style={styles.cardTitle}>{owner}</Text>
-        <Text style={styles.cardTitle}>{task}</Text>
-        <Text style={styles.cardTitle}>{priority}</Text>
-      </View>
-    </View>
+    <Card>
+      <Card.Cover source={{ uri: pic }} />
+      <Card.Content>
+        <Title>{person}</Title>
+        <Paragraph>{action}</Paragraph>
+        <Paragraph>{importance}</Paragraph>
+      </Card.Content>
+    </Card>
   );
 };
 

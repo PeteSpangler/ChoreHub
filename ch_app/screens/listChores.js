@@ -10,8 +10,7 @@ const ChoreList = ({ navigation }) => {
   const [data, setData] = useState([]);
   const getChoreList = async () => {
     console.log(client);
-    const response = await client.get("api/v1/chores/");
-    console.log(response.config);
+    const response = await client.get("api/v1/");
     setData(response.data);
   };
 

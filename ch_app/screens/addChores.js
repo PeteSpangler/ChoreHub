@@ -32,13 +32,14 @@ const AddChore = () => {
     data.append("priority", values.priority);
     data.append("ch_image", {
       uri: photo,
-      name: "filename.jpg",
+      name: Date.now() + "chore.jpg",
       type: "image/jpg",
     });
 
     try {
       const response = await client.post("api/v1/create/", data);
       postedAlert(response);
+      console.log(response.config);
     } catch (error) {
       console.log(error.config);
     }

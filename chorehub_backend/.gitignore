@@ -1,9 +1,0 @@
-env
-.vscode
-env.bat
-env.ps1
-env.sh
-.deployment
-*.__pycache__*
-db.sqlite3
-backend

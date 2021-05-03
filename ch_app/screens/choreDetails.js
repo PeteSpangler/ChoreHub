@@ -15,7 +15,6 @@ const ChoreDetail = ({ route }) => {
         setDetail(response.data);
       }
     } catch (error) {
-      console.log(error.config);
       console.log(error);
     }
   };
@@ -34,7 +33,7 @@ const ChoreDetail = ({ route }) => {
             <Image
               style={styles.thumbnail}
               source={{
-                uri: item.image,
+                uri: item.ch_image,
               }}
             />
           );

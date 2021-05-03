@@ -1,10 +1,10 @@
 import "react-native-gesture-handler";
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import { Provider as PaperProvider } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-
+import { QueryClientProvider, QueryClient } from "react-query";
 import HomeScreen from "./screens/homeScreen";
 import RegForm from "./screens/regForm";
 import LoginForm from "./screens/loginForm";
@@ -15,14 +15,7 @@ import AppHeader from "./components/appHeader";
 import Stats from "./screens/choreStats";
 import HouseForm from "./screens/houseForm";
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "#511F96",
-    accent: "#44CACB",
-  },
-};
+const queryClient = new QueryClient();
 
 const HomeStack = createStackNavigator();
 // This should be the authentication flow bozo
@@ -50,38 +43,40 @@ const Tab = createMaterialBottomTabNavigator();
 
 function App() {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <AppHeader />
-        <Tab.Navigator initialRouteName="Home Screen">
-          <Tab.Screen
-            name="Home"
-            component={HomeStackScreen}
-            options={{ tabBarIcon: "home-heart" }}
-          />
-          <Tab.Screen
-            name="Chores"
-            component={ChoreStackScreen}
-            options={{ tabBarIcon: "broom" }}
-          />
-          <Tab.Screen
-            name="Add"
-            component={AddChore}
-            options={{ tabBarIcon: "plus-box" }}
-          />
-          <Tab.Screen
-            name="Create House"
-            component={HouseForm}
-            options={{ tabBarIcon: "home-plus" }}
-          />
-          <Tab.Screen
-            name="Stats"
-            component={Stats}
-            options={{ tabBarIcon: "clipboard-check" }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <QueryClientProvider client={queryClient}>
+      <PaperProvider>
+        <NavigationContainer>
+          <AppHeader />
+          <Tab.Navigator initialRouteName="Home Screen">
+            <Tab.Screen
+              name="Home"
+              component={HomeStackScreen}
+              options={{ tabBarIcon: "home-heart" }}
+            />
+            <Tab.Screen
+              name="Chores"
+              component={ChoreStackScreen}
+              options={{ tabBarIcon: "broom" }}
+            />
+            <Tab.Screen
+              name="Add"
+              component={AddChore}
+              options={{ tabBarIcon: "plus-box" }}
+            />
+            <Tab.Screen
+              name="Create House"
+              component={HouseForm}
+              options={{ tabBarIcon: "home-plus" }}
+            />
+            <Tab.Screen
+              name="Stats"
+              component={Stats}
+              options={{ tabBarIcon: "clipboard-check" }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </QueryClientProvider>
   );
 }
 export default App;

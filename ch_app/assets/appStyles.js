@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     paddingTop: 25,
   },
   Button: {
-    borderWidth: 20,
+    borderWidth: 5,
   },
   fab: {
     position: "absolute",

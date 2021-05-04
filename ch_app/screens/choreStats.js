@@ -1,16 +1,7 @@
-import React, { useState } from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  NativeModules,
-  Text,
-  Alert,
-  View,
-} from "react-native";
-import { Button, TextInput } from "react-native-paper";
-import { Formik } from "formik";
+import React from "react";
+import { Text, View } from "react-native";
+
 import styles from "../assets/appStyles";
-import client from "../components/client";
 
 const Stats = () => {
   return (

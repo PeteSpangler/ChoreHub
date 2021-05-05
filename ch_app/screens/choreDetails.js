@@ -10,12 +10,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 const ChoreDetail = ({ route, navigation }) => {
   const { objurl } = route.params;
 
-  const [detail, setDetail] = useState({
-    owner: objurl.owner,
-    task: objurl.task,
-    priority: objurl.priority,
-    isComplete: objurl.isComplete,
-  });
+  const [detail, setDetail] = useState([]);
 
   const onChangeOwner = (value) => {
     setDetail({ ...detail, owner: value });

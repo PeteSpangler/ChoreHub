@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Alert, View, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import { Button, Card, Title, Paragraph } from "react-native-paper";
 import styles from "../assets/appStyles";
 import client from "../components/client";
 
 const ChoreList = ({ navigation }) => {
   const [data, setData] = useState([]);
+
   const getChoreList = async () => {
     const response = await client.get("/api/v1/");
     setData(response.data);

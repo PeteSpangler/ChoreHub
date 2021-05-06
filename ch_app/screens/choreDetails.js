@@ -4,10 +4,17 @@ import client from "../components/client";
 import { Button } from "react-native-paper";
 import { Formik } from "formik";
 import validationSchema from "./addChores_valid";
-import { View, FlatList, Text, SafeAreaView, TextInput } from "react-native";
+import {
+  Alert,
+  View,
+  FlatList,
+  Text,
+  SafeAreaView,
+  TextInput,
+} from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-const ChoreDetail = ({ route }) => {
+const ChoreDetail = ({ route, navigation }) => {
   const { objurl, person, action, importance, isDone, digit } = route.params;
   const [checkboxState, setCheckboxState] = useState(false);
 
@@ -18,6 +25,15 @@ const ChoreDetail = ({ route }) => {
     isComplete: route.params.isDone,
     num: route.params.digit,
   });
+  // PROPER REDIRECTION BRUV
+  const postedAlert = () => {
+    Alert.alert("Success!", "Thank you! ", [
+      {
+        text: "Chore Updated!",
+        onPress: () => navigation.navigate("Home"),
+      },
+    ]);
+  };
 
   const onChangeOwner = (value) => {
     setDetail({ ...detail, owner: value });
@@ -43,10 +59,10 @@ const ChoreDetail = ({ route }) => {
     data.append("isComplete", detail.isComplete);
 
     try {
-      const response = await client.put("/api/v1/update/" + detail.num, data);
-      console.log(response);
+      const response = await client.put(objurl + "update/", data);
       if (!response.ok) {
         setDetail(response.data);
+        postedAlert(response);
       }
     } catch (error) {
       console.log(error.config);

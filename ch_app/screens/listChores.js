@@ -17,7 +17,7 @@ const ChoreList = ({ navigation }) => {
   useEffect(() => {
     getChoreList();
   }, []);
-
+  //delete needs to work
   const DeleteChore = (item) => {
     try {
       const res = client.delete(item.delete);

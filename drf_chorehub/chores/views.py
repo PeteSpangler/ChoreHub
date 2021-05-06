@@ -22,7 +22,6 @@ class ChoreRetrieveAPIView(generics.RetrieveAPIView):
     lookup_field = "id"
     queryset = Chore.objects.all()
     serializer_class = ChoreDetailSerializer
-    permission_classes = [IsOwnerOrReadOnly]
 
 class ChoreCreateAPIView(generics.CreateAPIView):
     parser_classes = (MultiPartParser, FormParser)
@@ -33,7 +32,7 @@ class ChoreRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     lookup_field = "id"
     queryset = Chore.objects.all()
     serializer_class = ChoreDetailSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    parser_classes = (MultiPartParser, FormParser)
 
 class ChoreDestroyAPIView(generics.DestroyAPIView):
     lookup_field = "id"

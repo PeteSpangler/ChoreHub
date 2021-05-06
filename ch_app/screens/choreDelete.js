@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, View } from "react-native";
 import client from "../components/client";
 import { Button, Card, Title, Paragraph } from "react-native-paper";
 import styles from "../assets/appStyles";
@@ -24,6 +24,27 @@ const ChoreDelete = ({ route, navigation }) => {
     getDetail(objurl);
   }, []);
 
+  const deleteAlert = () => {
+    Alert.alert("Got it done?", "Chore has been deleted! ", [
+      {
+        text: "Chore Deleted!",
+        onPress: () => navigation.navigate("Home"),
+      },
+    ]);
+  };
+
+  const handleDelete = async () => {
+    try {
+      const res = await client.delete(objurl + "delete/");
+      if (!res.ok) {
+        setDetail(res.data);
+        deleteAlert(res);
+      }
+    } catch (error) {
+      console.log(error.config);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Card>
@@ -34,6 +55,7 @@ const ChoreDelete = ({ route, navigation }) => {
           <Paragraph>Priority: {detail.priority}</Paragraph>
         </Card.Content>
       </Card>
+      <Button onPress={handleDelete}>Confirm Delete</Button>
     </View>
   );
 };

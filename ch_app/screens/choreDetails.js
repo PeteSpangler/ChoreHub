@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "../assets/appStyles";
 import client from "../components/client";
 import { Button } from "react-native-paper";
-import { Formik } from "formik";
-import validationSchema from "./addChores_valid";
-import {
-  Alert,
-  View,
-  FlatList,
-  Text,
-  SafeAreaView,
-  TextInput,
-} from "react-native";
+import { Alert, View, SafeAreaView, TextInput } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const ChoreDetail = ({ route, navigation }) => {
@@ -27,7 +18,7 @@ const ChoreDetail = ({ route, navigation }) => {
   });
   // PROPER REDIRECTION BRUV
   const postedAlert = () => {
-    Alert.alert("Success!", "Thank you! ", [
+    Alert.alert("Got it done?", "Chore has been updated! ", [
       {
         text: "Chore Updated!",
         onPress: () => navigation.navigate("Home"),
@@ -68,17 +59,6 @@ const ChoreDetail = ({ route, navigation }) => {
       console.log(error.config);
     }
   };
-
-  // const getDetail = async (url) => {
-  //   try {
-  //     const response = await client.get(url);
-  //     if (!response.ok) {
-  //       setDetail(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <View>
@@ -127,58 +107,3 @@ const ChoreDetail = ({ route, navigation }) => {
 };
 
 export default ChoreDetail;
-
-//   Alert.alert("Success!", "Thank you! ", [
-//     {
-//       text: "Go to main screen",
-//       onPress: () => NativeModules.DevSettings.reload(),
-//     },
-//   ]);
-// };
-// const handleSubmit = async (values) => {
-//   const data = new FormData();
-//   data.append("isComplete", values.isComplete);
-
-//   // route to chosen chore url, so maybe absoluteurl?
-//   try {
-//     const response = await client.put("chores/update/{data.id}", data);
-//     postedAlert(response);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// return (
-//   <View>
-//     <Formik
-//       initialValues={{
-//         isComplete: false,
-//       }}
-//       onSubmit={handleSubmit}
-//       validationSchema={validationSchema}
-//     >
-//       {({ handleChange, handleSubmit, values, errors }) => (
-//         <SafeAreaView style={styles.content}>
-//           <View style={[styles.updateChorepage, { flexDirection: "column" }]}>
-//             <BouncyCheckbox
-//               size={25}
-//               fillColor="#1bb9ee"
-//               unfillColor="#007BFF"
-//               text="Was this chore completed?"
-//               onPress={() => {
-//                 values.isComplete;
-//               }}
-//             />
-//             <Button
-//               style={styles.Button}
-//               mode="contained"
-//               color="#1bb9ee"
-//               onPress={handleSubmit}
-//             >
-//               Submit
-//             </Button>
-//           </View>
-//         </SafeAreaView>
-//       )}
-//     </Formik>
-//   </View>

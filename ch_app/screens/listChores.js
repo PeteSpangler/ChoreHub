@@ -17,31 +17,6 @@ const ChoreList = ({ navigation }) => {
   useEffect(() => {
     getChoreList();
   }, []);
-  //delete needs to work
-  const DeleteChore = (item) => {
-    try {
-      const res = client.delete(item.delete);
-      console.log(res);
-      if (!res.ok) {
-        setDetail(res.data);
-      }
-    } catch (error) {
-      console.log(error.config);
-    }
-  };
-
-  const postedAlert = () => {
-    alert("Are you sure you want to delete this?", [
-      {
-        text: "DELETE",
-        onPress: () => {
-          {
-            DeleteChore;
-          }
-        },
-      },
-    ]);
-  };
 
   return (
     <View style={styles.container}>
@@ -69,13 +44,23 @@ const ChoreList = ({ navigation }) => {
                         action: item.task,
                         importance: item.priority,
                         isDone: item.isComplete,
-                        digit: item.id,
                       });
                     }}
                   >
                     Update
                   </Button>
-                  <Button onPress={postedAlert}>Delete</Button>
+                  <Button
+                    onPress={() => {
+                      navigation.navigate("Delete", {
+                        objurl: item.absolute_url,
+                        person: item.owner,
+                        action: item.task,
+                        importance: item.priority,
+                      });
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </Card.Actions>
               </Card>
             </View>

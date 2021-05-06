@@ -15,6 +15,10 @@ const styles = StyleSheet.create({
   Button: {
     borderWidth: 5,
   },
+  header: {
+    backgroundColor: "#511F96",
+    paddingTop: 15,
+  },
   fab: {
     position: "absolute",
   },

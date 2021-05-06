@@ -1,6 +1,7 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { Appbar } from "react-native-paper";
-import { Platform, StyleSheet } from "react-native";
+import { Platform } from "react-native";
+import styles from "../assets/appStyles";
 
 const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots-vertical";
 
@@ -11,10 +12,3 @@ export default function AppHeader() {
     </Appbar.Header>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#511F96",
-    paddingTop: 15,
-  },
-});

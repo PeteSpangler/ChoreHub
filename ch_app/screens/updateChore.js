@@ -1,18 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView, ScrollView, Text, Alert } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
-import { Formik } from "formik";
 import styles from "../assets/appStyles";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import client from "../components/client";
-import validationSchema from "./addChores_valid";
-import PhotoPicker from "../components/photoPicker";
 
-const UpdateChore = () => {
-  const navigation = useNavigation();
-  const [photo, setPhoto] = useState("");
+const UpdateChore = ({ route }, item) => {
+  console.log(item);
+  const { objurl } = route.params;
+
+  const [owner, setOwner] = useState(item.owner);
+  const [task, setTask] = useState(item.task);
+  const [priority, setPriority] = useState(item.priority);
+  const [checkboxState, setCheckboxState] = useState(false);
+
+  const [detail, setDetail] = useState([]);
+
+  const getDetail = async (url) => {
+    try {
+      const response = await client.get(url);
+      if (!response.ok) {
+        setDetail(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getDetail(objurl);
+  }, []);
+
   const postedAlert = () => {
-    Alert.alert("Success!", "Thank you! ", [
+    Alert.alert("Updated?", "Thank you! ", [
       {
         text: "Back to your Chore List!",
         onPress: () => navigation.navigate("Chores"),
@@ -22,17 +42,13 @@ const UpdateChore = () => {
 
   const handleSubmit = async (values) => {
     const data = new FormData();
-    data.append("owner", values.owner);
-    data.append("task", values.task);
-    data.append("priority", values.priority);
-    data.append("ch_image", {
-      uri: photo,
-      name: Date.now() + "chore.jpg",
-      type: "image/jpg",
-    });
+    data.append("owner", owner);
+    data.append("task", values);
+    data.append("priority", value.priority);
+    data.append("isComplete", values.isComplete);
 
     try {
-      const response = await client.put("/api/v1/create/", data);
+      const response = await client.patch(detail.update, data);
       postedAlert(response);
     } catch (error) {
       console.log(error.config);
@@ -40,57 +56,45 @@ const UpdateChore = () => {
   };
 
   return (
-    <Formik
-      initialValues={{
-        owner: "",
-        task: "",
-        priority: "",
-      }}
-      onSubmit={handleSubmit}
-      validationSchema={validationSchema}
-      enableReinitialize={true}
-    >
-      {({ handleChange, handleSubmit, values, errors }) => (
-        <SafeAreaView style={styles.content}>
-          <ScrollView>
-            <PhotoPicker photo={photo} onPressPhoto={(uri) => setPhoto(uri)} />
-            <TextInput
-              style={styles.textBox}
-              value={values.owner}
-              placeholder="Who will do this Chore?"
-              onChangeText={handleChange("owner")}
-            />
-            <Text style={styles.error}>{errors.owner}</Text>
-            <TextInput
-              style={styles.textBox}
-              value={values.task}
-              placeholder="What is the Chore?"
-              onChangeText={handleChange("task")}
-            />
-            <Text style={styles.error}>{errors.task}</Text>
-            <TextInput
-              style={styles.textBox}
-              value={values.priority}
-              placeholder="Importance, scale of 1 to 10?"
-              onChangeText={handleChange("priority")}
-            />
-            <Text style={styles.error}>{errors.priority}</Text>
-            <Button
-              style={styles.Button}
-              mode="contained"
-              color="#1bb9ee"
-              onPress={handleSubmit}
-            >
-              Submit
-            </Button>
-          </ScrollView>
-        </SafeAreaView>
-      )}
-    </Formik>
+    <SafeAreaView style={styles.content}>
+      <ScrollView>
+        <TextInput
+          style={styles.textBox}
+          value={owner}
+          placeholder="Who will do this Chore?"
+          onChangeText={(value) => setOwner(value)}
+        />
+        <TextInput
+          style={styles.textBox}
+          value={task}
+          placeholder="What is the Chore?"
+          onChangeText={(value) => setTask(value)}
+        />
+        <TextInput
+          style={styles.textBox}
+          value={String(priority)}
+          placeholder="Importance, scale of 1 to 10?"
+          onChangeText={(value) => setPriority(value)}
+        />
+        <BouncyCheckbox
+          size={25}
+          fillColor="#1bb9ee"
+          unfillColor="#007BFF"
+          isChecked={checkboxState}
+          text="Was this chore completed?"
+          onPress={() => setCheckboxState(!checkboxState)}
+          value={item.isComplete}
+        />
+        <Button
+          style={styles.Button}
+          mode="contained"
+          color="#1bb9ee"
+          onPress={handleSubmit}
+        >
+          Update!
+        </Button>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 export default UpdateChore;
-
-// https://www.appliz.fr/blog/how-to-use-formik
-// https://www.youtube.com/watch?v=awCY7qnbkIA
-// https://www.youtube.com/watch?v=v9S0fW8cjrw&t=14917s

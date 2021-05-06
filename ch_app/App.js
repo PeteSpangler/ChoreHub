@@ -12,6 +12,7 @@ import AddChore from "./screens/addChores";
 import ChoreList from "./screens/listChores";
 import ChoreDetail from "./screens/choreDetails";
 import ChoreDelete from "./screens/choreDelete";
+import UpdateChore from "./screens/updateChore";
 import AppHeader from "./components/appHeader";
 import Stats from "./screens/choreStats";
 import HouseForm from "./screens/houseForm";

@@ -7,10 +7,17 @@ import validationSchema from "./addChores_valid";
 import { View, FlatList, Text, SafeAreaView, TextInput } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-const ChoreDetail = ({ route, navigation }) => {
-  const { objurl } = route.params;
+const ChoreDetail = ({ route }) => {
+  const { objurl, person, action, importance, isDone, digit } = route.params;
+  const [checkboxState, setCheckboxState] = useState(false);
 
-  const [detail, setDetail] = useState([]);
+  const [detail, setDetail] = useState({
+    owner: route.params.person,
+    task: route.params.action,
+    priority: route.params.importance,
+    isComplete: route.params.isDone,
+    num: route.params.digit,
+  });
 
   const onChangeOwner = (value) => {
     setDetail({ ...detail, owner: value });
@@ -28,15 +35,15 @@ const ChoreDetail = ({ route, navigation }) => {
     setDetail({ ...detail, isComplete: value });
   };
 
-  const handleSubmit = async (value) => {
+  const handleSubmit = async () => {
     const data = new FormData();
-    data.append("owner", value.owner);
-    data.append("task", value.task);
-    data.append("priority", value.priority);
-    data.append("isComplete", value.isComplete);
+    data.append("owner", detail.owner);
+    data.append("task", detail.task);
+    data.append("priority", detail.priority);
+    data.append("isComplete", detail.isComplete);
 
     try {
-      const response = await client.put(detail.update, data);
+      const response = await client.put("/api/v1/update/" + detail.num, data);
       console.log(response);
       if (!response.ok) {
         setDetail(response.data);
@@ -46,20 +53,16 @@ const ChoreDetail = ({ route, navigation }) => {
     }
   };
 
-  const getDetail = async (url) => {
-    try {
-      const response = await client.get(url);
-      if (!response.ok) {
-        setDetail(response.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getDetail(objurl);
-  }, []);
+  // const getDetail = async (url) => {
+  //   try {
+  //     const response = await client.get(url);
+  //     if (!response.ok) {
+  //       setDetail(response.data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <View>
@@ -88,10 +91,9 @@ const ChoreDetail = ({ route, navigation }) => {
             size={25}
             fillColor="#1bb9ee"
             unfillColor="#007BFF"
+            isChecked={checkboxState}
             text="Was this chore completed?"
-            onPress={(value) => {
-              onChangeisComplete(value);
-            }}
+            onPress={() => setCheckboxState(!checkboxState)}
             value={detail.isComplete}
           />
           <Button

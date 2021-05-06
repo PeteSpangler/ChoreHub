@@ -6,19 +6,21 @@ import client from "../components/client";
 
 const ChoreList = ({ navigation }) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getChoreList = async () => {
     const response = await client.get("/api/v1/");
     setData(response.data);
+    setLoading(false);
   };
 
   useEffect(() => {
     getChoreList();
   }, []);
 
-  const DeleteChore = async (item) => {
+  const DeleteChore = (item) => {
     try {
-      const res = await client.delete(item.delete);
+      const res = client.delete(item.delete);
       console.log(res);
       if (!res.ok) {
         setDetail(res.data);
@@ -28,11 +30,15 @@ const ChoreList = ({ navigation }) => {
     }
   };
 
-  const postedAlert = (item) => {
+  const postedAlert = () => {
     alert("Are you sure you want to delete this?", [
       {
         text: "DELETE",
-        onPress: { DeleteChore },
+        onPress: () => {
+          {
+            DeleteChore;
+          }
+        },
       },
     ]);
   };
@@ -41,6 +47,8 @@ const ChoreList = ({ navigation }) => {
     <View style={styles.container}>
       <FlatList
         data={data}
+        onRefresh={() => getChoreList()}
+        refreshing={loading}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => {
           return (
@@ -57,6 +65,11 @@ const ChoreList = ({ navigation }) => {
                     onPress={() => {
                       navigation.navigate("Details", {
                         objurl: item.absolute_url,
+                        person: item.owner,
+                        action: item.task,
+                        importance: item.priority,
+                        isDone: item.isComplete,
+                        digit: item.id,
                       });
                     }}
                   >

@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import React, { useState } from "react";
 import * as SecureStore from "expo-secure-store";
-import { UserContext } from "./components/userContext";
+import { UserContext, AuthContext } from "./components/userContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -15,8 +15,6 @@ import ChoreList from "./screens/listChores";
 import ChoreDetail from "./screens/choreDetails";
 import ChoreDelete from "./screens/choreDelete";
 import AppHeader from "./components/appHeader";
-import Stats from "./screens/choreStats";
-import HouseForm from "./screens/houseForm";
 
 const queryClient = new QueryClient();
 
@@ -47,41 +45,34 @@ const Tab = createMaterialBottomTabNavigator();
 
 function App() {
   const [user, setUser] = useState("butthead");
+  const [userToken, setUserToken] = useState("");
   return (
     <QueryClientProvider client={queryClient}>
       <PaperProvider>
-        <UserContext.Provider value={{ user, setUser }}>
-          <NavigationContainer>
-            <AppHeader />
-            <Tab.Navigator initialRouteName="Home Screen">
-              <Tab.Screen
-                name="Home"
-                component={HomeStackScreen}
-                options={{ tabBarIcon: "home-heart" }}
-              />
-              <Tab.Screen
-                name="Chores"
-                component={ChoreStackScreen}
-                options={{ tabBarIcon: "broom" }}
-              />
-              <Tab.Screen
-                name="Add"
-                component={AddChore}
-                options={{ tabBarIcon: "plus-box" }}
-              />
-              <Tab.Screen
-                name="Create House"
-                component={HouseForm}
-                options={{ tabBarIcon: "home-plus" }}
-              />
-              <Tab.Screen
-                name="Stats"
-                component={Stats}
-                options={{ tabBarIcon: "clipboard-check" }}
-              />
-            </Tab.Navigator>
-          </NavigationContainer>
-        </UserContext.Provider>
+        <AuthContext.Provider value={{ userToken, setUserToken }}>
+          <UserContext.Provider value={{ user, setUser }}>
+            <NavigationContainer>
+              <AppHeader />
+              <Tab.Navigator initialRouteName="Home Screen">
+                <Tab.Screen
+                  name="Home"
+                  component={HomeStackScreen}
+                  options={{ tabBarIcon: "home-heart" }}
+                />
+                <Tab.Screen
+                  name="Chores"
+                  component={ChoreStackScreen}
+                  options={{ tabBarIcon: "broom" }}
+                />
+                <Tab.Screen
+                  name="Add"
+                  component={AddChore}
+                  options={{ tabBarIcon: "plus-box" }}
+                />
+              </Tab.Navigator>
+            </NavigationContainer>
+          </UserContext.Provider>
+        </AuthContext.Provider>
       </PaperProvider>
     </QueryClientProvider>
   );

@@ -4,7 +4,7 @@ import { Button, TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import styles from "../assets/appStyles";
-import client from "../components/client";
+import client from "../api/client";
 import validationSchema from "./addChores_valid";
 import PhotoPicker from "../components/photoPicker";
 

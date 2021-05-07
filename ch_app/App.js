@@ -1,6 +1,5 @@
 import "react-native-gesture-handler";
 import React, { useState } from "react";
-import * as SecureStore from "expo-secure-store";
 import { UserContext, AuthContext } from "./components/userContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -19,7 +18,6 @@ import AppHeader from "./components/appHeader";
 const queryClient = new QueryClient();
 
 const HomeStack = createStackNavigator();
-// This should be the authentication flow bozo
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
@@ -44,7 +42,7 @@ function ChoreStackScreen() {
 const Tab = createMaterialBottomTabNavigator();
 
 function App() {
-  const [user, setUser] = useState("butthead");
+  const [user, setUser] = useState("Not Logged In");
   const [userToken, setUserToken] = useState("");
   return (
     <QueryClientProvider client={queryClient}>
@@ -78,38 +76,3 @@ function App() {
   );
 }
 export default App;
-
-// Authentication Flow!
-// isSignedIn ? (
-//   <>
-//     <Stack.Screen name="Home" component={HomeScreen} />
-//     <Stack.Screen name="Profile" component={ProfileScreen} />
-//     <Stack.Screen name="Settings" component={SettingsScreen} />
-//   </>
-// ) : (
-//   <>
-//     <Stack.Screen name="SignIn" component={SignInScreen} />
-//     <Stack.Screen name="SignUp" component={SignUpScreen} />
-//   </>
-// )
-// import * as SecureStore from 'expo-secure-store';
-
-// const MY_SECURE_AUTH_STATE_KEY = 'MySecureAuthStateKey';
-
-// function App() {
-//   const [, response] = useAuthRequest({});
-
-//   React.useEffect(() => {
-//     if (response && response.type === 'success') {
-//       const auth = response.params;
-//       const storageValue = JSON.stringify(auth);
-
-//       if (Platform.OS !== 'web') {
-//         // Securely store the auth on your device
-//         SecureStore.setItemAsync(MY_SECURE_AUTH_STATE_KEY, storageValue);
-//       }
-//     }
-//   }, [response]);
-
-//   // More login code...
-// }

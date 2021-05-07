@@ -1,24 +1,34 @@
-import React from "react";
-import { Text, View, SafeAreaView, NativeModules } from "react-native";
-import client from "../components/client";
+import React, { useState, useContext } from "react";
+import { Alert, Text, View, SafeAreaView, NativeModules } from "react-native";
+import { UserContext, AuthContext } from "../components/userContext";
+import * as SecureStore from "expo-secure-store";
+import client from "../api/client";
 import styles from "../assets/appStyles";
 import { Formik } from "formik";
 import { Button, TextInput } from "react-native-paper";
 
-const LoginForm = () => {
+const LoginForm = ({ navigation }) => {
+  const { user, setUser } = useContext(UserContext);
+  const { userToken, setUserToken } = useContext(AuthContext);
+
+  const postedAlert = () => {
+    Alert.alert("Success!", "Thank you! ", [
+      {
+        text: "Time to do some Chores!!",
+        onPress: () => navigation.pop(),
+      },
+    ]);
+  };
+
   const handleSubmit = async (values) => {
     const data = new FormData();
     data.append("username", values.username);
     data.append("password", values.password);
     try {
       const response = await client.post("api-token-auth/", data);
-      console.log(response.data.token);
-      alert("Success!", "Thank you! ", [
-        {
-          text: "Go to main screen",
-          onPress: () => NativeModules.DevSettings.reload(),
-        },
-      ]);
+      setUserToken(response.data.token);
+      setUser(values.username);
+      postedAlert(response);
     } catch (error) {
       console.log(error);
     }
@@ -32,6 +42,7 @@ const LoginForm = () => {
           password: "",
         }}
         onSubmit={handleSubmit}
+        enableReinitialize={true}
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <SafeAreaView style={styles.content}>

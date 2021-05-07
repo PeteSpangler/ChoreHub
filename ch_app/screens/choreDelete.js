@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Alert, View } from "react-native";
-import client from "../components/client";
+import client from "../api/client";
 import { Button, Card, Title, Paragraph } from "react-native-paper";
 import styles from "../assets/appStyles";
 
@@ -28,7 +28,7 @@ const ChoreDelete = ({ route, navigation }) => {
     Alert.alert("Got it done?", "Chore has been deleted! ", [
       {
         text: "Chore Deleted!",
-        onPress: () => navigation.navigate("Home"),
+        onPress: () => navigation.popToTop(),
       },
     ]);
   };
@@ -55,7 +55,13 @@ const ChoreDelete = ({ route, navigation }) => {
           <Paragraph>Priority: {detail.priority}</Paragraph>
         </Card.Content>
       </Card>
-      <Button onPress={handleDelete}>Confirm Delete</Button>
+      <Button
+        icon="trash-can-outline"
+        style={styles.addButton}
+        onPress={handleDelete}
+      >
+        Confirm Delete
+      </Button>
     </View>
   );
 };

@@ -1,28 +1,29 @@
 import React from "react";
-import { Text, View, SafeAreaView, NativeModules } from "react-native";
+import { Alert, Text, View, SafeAreaView } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import client from "../components/client";
+import client from "../api/client";
 import styles from "../assets/appStyles";
 import { Formik } from "formik";
 
-const RegForm = () => {
+const RegForm = ({ navigation }) => {
+  const postedAlert = () => {
+    Alert.alert("Success!", "Thank you! ", [
+      {
+        text: "Now go Login!",
+        onPress: () => navigation.popToTop(),
+      },
+    ]);
+  };
+
   const handleSubmit = async (values) => {
     const data = new FormData();
     data.append("username", values.username);
     data.append("password", values.password);
     try {
-      console.log(data);
       const response = await client.post("register/", data);
-      console.log(response.data);
-      alert(response.data);
-      alert("Success!", "Thank you! ", [
-        {
-          text: "Go to main screen",
-          onPress: () => NativeModules.DevSettings.reload(),
-        },
-      ]);
+      postedAlert(response);
     } catch (error) {
-      console.log(error);
+      alert("User already exists or you made a mistake? Please try again!");
     }
   };
 

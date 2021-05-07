@@ -17,10 +17,8 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: "#511F96",
-    paddingTop: 15,
-  },
-  fab: {
-    position: "absolute",
+    paddingTop: 10,
+    justifyContent: "space-between",
   },
   instructions: {
     color: "#44CACB",
@@ -47,7 +45,7 @@ const styles = StyleSheet.create({
   thumbnail: {
     width: 300,
     height: 300,
-    resizeMode: "contain",
+    resizeMode: "center",
   },
   error: {
     color: "red",
@@ -90,6 +88,9 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: "#44CACB",
     textAlign: "center",
+  },
+  deleteButton: {
+    paddingLeft: 100,
   },
 });
 export default styles;

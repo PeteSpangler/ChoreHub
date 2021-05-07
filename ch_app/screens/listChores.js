@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, FlatList } from "react-native";
 import { Button, Card, Title, Paragraph } from "react-native-paper";
 import styles from "../assets/appStyles";
-import client from "../components/client";
+import client from "../api/client";
 
 const ChoreList = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -37,6 +37,7 @@ const ChoreList = ({ navigation }) => {
                 </Card.Content>
                 <Card.Actions>
                   <Button
+                    icon="file-document-edit-outline"
                     onPress={() => {
                       navigation.navigate("Details", {
                         objurl: item.absolute_url,
@@ -44,12 +45,15 @@ const ChoreList = ({ navigation }) => {
                         action: item.task,
                         importance: item.priority,
                         isDone: item.isComplete,
+                        pic: item.ch_image,
                       });
                     }}
                   >
                     Update
                   </Button>
                   <Button
+                    style={styles.deleteButton}
+                    icon="trash-can-outline"
                     onPress={() => {
                       navigation.navigate("Delete", {
                         objurl: item.absolute_url,

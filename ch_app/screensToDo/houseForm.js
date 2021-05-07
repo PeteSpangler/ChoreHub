@@ -10,7 +10,7 @@ import {
 import { Button, TextInput } from "react-native-paper";
 import { Formik } from "formik";
 import styles from "../assets/appStyles";
-import client from "../components/client";
+import client from "../api/client";
 
 const HouseForm = () => {
   return (

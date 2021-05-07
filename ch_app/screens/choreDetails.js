@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import styles from "../assets/appStyles";
-import client from "../components/client";
+import client from "../api/client";
 import { Button } from "react-native-paper";
-import { Alert, View, SafeAreaView, TextInput } from "react-native";
+import { Alert, Image, View, SafeAreaView, TextInput } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const ChoreDetail = ({ route, navigation }) => {
-  const { objurl, person, action, importance, isDone, digit } = route.params;
-  const [checkboxState, setCheckboxState] = useState(false);
+  const {
+    objurl,
+    person,
+    action,
+    importance,
+    isDone,
+    digit,
+    pic,
+  } = route.params;
 
   const [detail, setDetail] = useState({
     owner: route.params.person,
@@ -15,13 +22,13 @@ const ChoreDetail = ({ route, navigation }) => {
     priority: route.params.importance,
     isComplete: route.params.isDone,
     num: route.params.digit,
+    ch_image: route.params.pic,
   });
-  // PROPER REDIRECTION BRUV
   const postedAlert = () => {
     Alert.alert("Got it done?", "Chore has been updated! ", [
       {
         text: "Chore Updated!",
-        onPress: () => navigation.navigate("Home"),
+        onPress: () => navigation.pop(),
       },
     ]);
   };
@@ -64,6 +71,7 @@ const ChoreDetail = ({ route, navigation }) => {
     <View>
       <SafeAreaView style={styles.content}>
         <View style={[styles.content, { flexDirection: "column" }]}>
+          <Image style={styles.thumbnail} source={{ uri: detail.ch_image }} />
           <TextInput
             style={styles.textBox}
             placeholder={detail.owner}
@@ -87,9 +95,9 @@ const ChoreDetail = ({ route, navigation }) => {
             size={25}
             fillColor="#1bb9ee"
             unfillColor="#007BFF"
-            isChecked={checkboxState}
+            isChecked={detail.isComplete}
             text="Was this chore completed?"
-            onPress={() => setCheckboxState(!checkboxState)}
+            onPress={() => onChangeisComplete(!detail.isComplete)}
             value={detail.isComplete}
           />
           <Button
